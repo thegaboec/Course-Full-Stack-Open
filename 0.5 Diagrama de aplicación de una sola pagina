@@ -1,0 +1,31 @@
+```mermaid
+sequenceDiagram
+    participant browser
+    participant server
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server->>: HTML document
+    desactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server->>: The css file
+    desactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server->>: the javascript file
+    desactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server.
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server->>: [{content: "what", date: "2025-04-03T11:52:22.643Z"},…]
+    desactivate server
+
+    Note right of browser: The browser executes the callback function that renders the datas.
+    
+    
+
+```
