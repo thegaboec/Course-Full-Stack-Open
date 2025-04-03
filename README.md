@@ -1,17 +1,21 @@
 # Part-0
 Examples
 ```mermaid
-sequenceDiagram
-    autonumber
-    Usuario->>+Frontend: Login
-    Frontend->>+Backend: POST /api/login
-    alt Credenciales válidas
-        Backend->>+DB: SELECT user
-        DB-->>-Backend: Datos usuario
-        Backend-->>-Frontend: 200 OK (JWT)
-        Frontend-->>-Usuario: "Bienvenido"
-    else Error
-        Backend-->>-Frontend: 401 Unauthorized
-        Frontend-->>-Usuario: "Credenciales inválidas"
-    end
+participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
 ```
