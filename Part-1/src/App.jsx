@@ -57,9 +57,9 @@ const App = () => {
  
 
   const content =[
-    {conten:'Fundamentals of React', exercises:10},
-    {conten:'Using props to pass data', exercises:7},
-    {conten:'State of a component', exercises:14},
+    {content:'Fundamentals of React', exercises:10},
+    {content:'Using props to pass data', exercises:7},
+    {content:'State of a component', exercises:14},
   ]
 
   const total= content[0].exercises+content[1].exercises+content[2].exercises
