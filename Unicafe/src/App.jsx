@@ -86,7 +86,7 @@ const App = () => {
 
   return (
     <div>
-      code here
+      
 
       < Titulo titulo={feedbackTitle}/>
       < Button handleClick={ () =>handleFeedbackClick('good')} text='good'/>
