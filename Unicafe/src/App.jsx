@@ -20,6 +20,49 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
+const Statistics = ({ good, neutral, bad }) => {
+  const total = good + neutral + bad;
+  const average = total === 0 ? 0 : (good - bad) / total
+  const positivePercentage = total === 0 ? 0 : (good / total) * 100
+
+  if (total === 0) {
+    return <p>No feedback given</p>;
+  }
+
+  return (
+    <div>
+      <table>
+        <tbody>
+          <tr>
+            <td>Good:</td>
+            <td>{good}</td>
+          </tr>
+          <tr>
+            <td>Neutral:</td>
+            <td>{neutral}</td>
+          </tr>
+          <tr>
+            <td>Bad:</td>
+            <td>{bad}</td>
+          </tr>
+          <tr>
+            <td>Total:</td>
+            <td>{total}</td>
+          </tr>
+          <tr>
+            <td>Average:</td>
+            <td>{average.toFixed(2)}</td> 
+          </tr>
+          <tr>
+            <td>Positive:</td>
+            <td>{positivePercentage.toFixed(2)}%</td> 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 
 
 const App = () => {
@@ -27,45 +70,31 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  const [total,setTotal]= useState(0)
 
   const feedbackTitle = 'Give feedback'
   const statisticsTitle= 'Statistics'
 
-  const handleGoodClick = () => {
-    
-    const updatedGood = good + 1
-    setGood(updatedGood)
-    setTotal(updatedGood + bad +neutral)
-  }
-
-
-  const handleBadClick = () => {
-    
-    const updateBad= bad+1
-    setBad(updateBad)
-    setTotal(updateBad+good+neutral)
-  }
-
-   const handleNeutralClick = () => {
-    
-    const updateNeutral= neutral+1
-    setNeutral(updateNeutral)
-    setTotal(updateNeutral+good+bad)
-  }
+  const handleFeedbackClick = (type) => {
+    if (type === 'good') {
+      setGood(good + 1);
+    } else if (type === 'neutral') {
+      setNeutral(neutral + 1);
+    } else if (type === 'bad') {
+      setBad(bad + 1);
+    }
+  };
 
   return (
     <div>
       code here
 
       < Titulo titulo={feedbackTitle}/>
-      < Button handleClick={handleGoodClick} text='good'/>
-      < Button handleClick={handleBadClick} text='bad'/>
-      < Button handleClick={handleNeutralClick} text='neutral'/>
+      < Button handleClick={ () =>handleFeedbackClick('good')} text='good'/>
+      < Button handleClick={ () =>handleFeedbackClick('bad')} text='bad'/>
+      < Button handleClick={ () =>handleFeedbackClick('neutral')} text='neutral'/>
       < Titulo titulo={statisticsTitle}/>
-      <p> Good:{good}</p>
-      <p> Bad: {bad}</p>
-      <p> Neutral:{neutral}</p>
+      < Statistics good={good} neutral={neutral} bad={bad}/>
+      
     </div>
   )
 }
